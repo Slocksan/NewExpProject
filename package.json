@@ -21,10 +21,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start ./NewExpProject/ClientApp",
-    "build": "react-scripts build ./NewExpProject/ClientApp",
-    "test": "react-scripts test ./NewExpProject/ClientApp",
-    "eject": "react-scripts eject ./NewExpProject/ClientApp"
+    "start": "react-scripts start",
+    "build": "cd  ./NewExpProject/ClientApp && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
