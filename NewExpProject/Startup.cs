@@ -59,11 +59,11 @@ namespace NewExpProject
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "..";
+                spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "start --prefix ./NewExpProject/ClientApp");
+                    spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
         }
