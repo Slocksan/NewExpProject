@@ -1,6 +1,7 @@
 {
   "name": "exp_project",
   "version": "0.1.0",
+  "main": "NewExpProject/ClientApp/index.js",
   "private": true,
   "engines": {
     "node": ">=10.16.0 <=14.x.x",
