@@ -25,8 +25,7 @@ const DataTable = function ({ columns, data }) {
   } = useTable(
     {
       columns,
-      data,
-      initialState: { pageIndex: 2 },
+      data
     },
     usePagination
   )

@@ -71,6 +71,15 @@ footer {
     width: 90%;
 }
 
+div .datagrid-buttons {
+    margin-left: 20px;
+    border-radius: 0;
+    background-color: #f6b00f;
+    height: 23px;
+    padding: 2px 5px;
+    line-height: 18px;
+}
+
 body *{
     box-sizing: border-box;
   }
@@ -117,8 +126,10 @@ background-size: 400px;
 background-image: url(../images/logos.png);
 }
 
-.navbar-main-container {
-    display: flex;
+@media (min-width: 576px) {
+    .navbar-main-container {
+        display: flex;
+    }
 }
 
 .pagination {
@@ -137,4 +148,8 @@ background-image: url(../images/logos.png);
 
 .pagination select {
     width: fit-content;
+}
+
+.chart div canvas {
+    height: 800px;
 }

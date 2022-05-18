@@ -25,12 +25,12 @@ export class NavMenu extends Component {
       <header>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm">
           <Container className='navbar-main-container'>
-            <NavbarBrand href="/expeditions"><div class="logo"></div></NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+            <NavbarBrand className='float-left d-block' href="/expeditions"><div class="logo"></div></NavbarBrand>
+            <NavbarToggler onClick={this.toggleNavbar} className="mr-2 float-right" />
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
               <ul className="navbar-nav flex-grow">
                 <NavItem>
-                  <NavLink href="/expeditions" className="header-nav-link" exact={true}>Экспедиции</NavLink>
+                  <NavLink href="/expeditions" className="header-nav-link">Экспедиции</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink href="/employees" className="header-nav-link">Сотрудники</NavLink>
