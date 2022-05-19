@@ -16,7 +16,7 @@ export default function PositionCreateForm({createPosition}) {
     }
 
     return (
-        <form>
+        <form className='position-form'>
             <Input
                 value={position.Name}
                 onChange={e => setPosition({...position, Name: e.target.value})}

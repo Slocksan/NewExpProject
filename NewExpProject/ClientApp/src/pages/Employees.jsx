@@ -6,7 +6,7 @@ import ModalWin from '../components/ModalWin';
 import Cookies from 'js-cookie';
 import EmployeeCreateForm from '../components/employee/EmployeeCreateForm';
 import EmployeeEditForm from '../components/employee/EmployeeEditForm';
-import PlaceViewForm from '../components/place/PlaceViewForm';
+import EmployeeView from '../components/employee/EmployeeView';
 
 function Employees() {
     const [employees, setEmployees] = useState([]);
@@ -57,7 +57,7 @@ function Employees() {
     }
 
     const deleteEmployee = async (employee) => {
-        const responce = await axios.delete(sitePath + "/api/employees" + employee.id, {
+        const responce = await axios.delete(sitePath + "/api/employees/" + employee.id, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('Token')}` 
             }
@@ -124,13 +124,12 @@ function Employees() {
             id: "action"
          }
     ]));
-    //{selectedEmployee && <ModalWin visible={editModal} setVisible={setEditModal}><EmployeeEditForm editPlace={updateEmployee} oldPlace={selectedEmployee}/></ModalWin>}
-    //        {selectedEmployee && <ModalWin visible={viewModal} setVisible={setViewModal}><EmployeeViewForm oldPlace={selectedEmployee}/></ModalWin>}
+
     return(
         <div>
             <ModalWin visible={createModal} setVisible={setCreateModal}><EmployeeCreateForm createEmployee={addEmployee}/></ModalWin>
             {selectedEmployee && <ModalWin visible={editModal} setVisible={setEditModal}><EmployeeEditForm editEmployee={updateEmployee} oldEmployee={selectedEmployee}/></ModalWin>}
-            
+            {selectedEmployee && <ModalWin visible={viewModal} setVisible={setViewModal}><EmployeeView selectedEmployee={selectedEmployee}/></ModalWin>}
             <div class="datagrid"><DataTable columns={columns} data={employees}/></div>
             <div class="buttons-container  d-flex justify-content-end">
                 <Button onClick={() => setCreateModal(true)}>Создать</Button>

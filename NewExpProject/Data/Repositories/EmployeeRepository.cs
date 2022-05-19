@@ -13,7 +13,12 @@ namespace NewExpProject.Data.Repositories
         {
             using (var db = new AppDBContext())
             {
-                return db.Employees.ToList();
+                var employees = db.Employees.ToList();
+                foreach (var employee in employees)
+                {
+                    employee.Position = db.Positions.FirstOrDefault(p => p.ID == employee.PositionID);
+                }
+                return employees;
             }
         }
 
@@ -21,7 +26,13 @@ namespace NewExpProject.Data.Repositories
         {
             using (var db = new AppDBContext())
             {
-                return db.Employees.FirstOrDefault(p => p.ID == employeeId);
+                var employee = db.Employees.FirstOrDefault(p => p.ID == employeeId);
+                if (employee != null)
+                {
+                    employee.Position = db.Positions.FirstOrDefault(p => p.ID == employee.PositionID);
+                }
+
+                return employee;
             }
         }
 

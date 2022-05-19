@@ -95,8 +95,8 @@ function Positions() {
         <div>
             <ModalWin visible={createModal} setVisible={setCreateModal}><PositionCreateForm createPosition={addPosition}/></ModalWin>
             {editedPosition && <ModalWin visible={editModal} setVisible={setEditModal}><PositionEditForm editPosition={updatePosition} parentPosition={editedPosition}/></ModalWin>}
-            <div class="datagrid"><DataTable columns={columns} data={positions}></DataTable></div>
-            <div class="buttons-container  d-flex justify-content-end">
+            <div className="datagrid"><DataTable columns={columns} data={positions}></DataTable></div>
+            <div className="buttons-container  d-flex justify-content-end">
                 <Button onClick={() => setCreateModal(true)}>Создать</Button>
             </div>
         </div>

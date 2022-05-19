@@ -9,10 +9,12 @@ export default function ModalWin({children, visible, setVisible}) {
     }
 
     return (
+        visible ? (
     <div className={rootClasses.join(' ')} onClick={() => setVisible(false)}>
         <div className={cl.ModalWinContent} onClick={(e) => e.stopPropagation()}>
             {children}
         </div>
     </div>
+    ) : null
   )
 }

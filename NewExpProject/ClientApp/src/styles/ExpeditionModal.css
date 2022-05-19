@@ -1,17 +1,14 @@
-.place-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.expedition-form {
     height: 480px;
-    width: 400px;
+    width: 700px;
 }
 
-.place-form textarea {
+.expedition-form textarea {
     height: 250px;
     resize: none;
 }
 
-.places-columns-container {
+.expeditions-columns-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -19,6 +16,6 @@
     width: 400px;
 }
 
-.place-discription {
+.expedition-discription {
     height: 250px;
 }

@@ -17,7 +17,7 @@ export default function PositionEditForm({editPosition, parentPosition}) {
     }
 
     return (
-        <form>
+        <form className='position-form'>
             <Input
                 value={position}
                 onChange={e => setPosition(e.target.value)}

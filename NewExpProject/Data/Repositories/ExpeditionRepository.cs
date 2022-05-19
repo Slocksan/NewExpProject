@@ -12,7 +12,13 @@ namespace NewExpProject.Data.Repositories
         {
             using (var db = new AppDBContext())
             {
-                return db.Expeditions.ToList();
+                var exps = db.Expeditions.ToList();
+
+                foreach (var expedition in exps)
+                {
+                    expedition.Place = db.Places.FirstOrDefault(p => p.ID == expedition.PlaceId);
+                }
+                return exps;
             }
         }
 
@@ -20,7 +26,14 @@ namespace NewExpProject.Data.Repositories
         {
             using (var db = new AppDBContext())
             {
-                return db.Expeditions.FirstOrDefault(p => p.ID == expeditionId);
+                var exp = db.Expeditions.FirstOrDefault(p => p.ID == expeditionId);
+
+                if (exp != null)
+                {
+                    exp.Place = db.Places.FirstOrDefault(p => p.ID == exp.PlaceId);
+                }
+                
+                return exp;
             }
         }
 

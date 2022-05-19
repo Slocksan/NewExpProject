@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Input, Button} from 'reactstrap';
-import "../../styles/PlaceModal.css"
+import styles from "../../styles/PlaceModal.css"
 
-export default function PlaceCreateForm({editPlace, oldPlace}) {
+export default function PlaceEditForm({editPlace, oldPlace}) {
     const [place, setPlace] = useState({...oldPlace, name: oldPlace.name.trim(), description: oldPlace.description.trim()});
 
     const addNewPlace = (e) => {
@@ -13,8 +13,12 @@ export default function PlaceCreateForm({editPlace, oldPlace}) {
         editPlace(newPlace)
     }
 
+    useEffect(()=> {
+        console.log(oldPlace);
+    }, []);
+
     return (
-        <form>
+        <form className='place-form'>
             <Input
                 value={place.name}
                 onChange={e => setPlace({...place, name: e.target.value})}

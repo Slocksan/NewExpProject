@@ -56,10 +56,6 @@ const DataTable = function ({ columns, data }) {
           })}
         </tbody>
       </Table>
-      {/* 
-        Pagination can be built however you'd like. 
-        This is just a very basic UI implementation:
-      */}
       <div className="pagination">
         <Button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
           {'<<'}

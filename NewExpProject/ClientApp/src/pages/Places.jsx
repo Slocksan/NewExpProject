@@ -100,7 +100,7 @@ function Places() {
     
     return(
         <div>
-            <ModalWin visible={createModal} setCreateModal={setCreateModal}><PlaceCreateForm createPlace={addPlace}/></ModalWin>
+            <ModalWin visible={createModal} setVisible={setCreateModal}><PlaceCreateForm createPlace={addPlace}/></ModalWin>
             {selectedPlace && <ModalWin visible={editModal} setVisible={setEditModal}><PlaceEditForm editPlace={updatePlace} oldPlace={selectedPlace}/></ModalWin>}
             {selectedPlace && <ModalWin visible={viewModal} setVisible={setViewModal}><PlaceViewForm oldPlace={selectedPlace}/></ModalWin>}
             <div class="datagrid"><DataTable columns={columns} data={places}></DataTable></div>

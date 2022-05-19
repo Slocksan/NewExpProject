@@ -5,7 +5,7 @@ export default function PlaceViewForm({oldPlace}) {
     const [place, setPlace] = useState({...oldPlace, name: oldPlace.name.trim(), description: oldPlace.description.trim()});
 
     return (
-        <div className='columns-container'>
+        <div className='places-columns-container'>
             <div className='columns-container-item'>
                 <span>Наименование: </span>
                 <span>{place.name}</span>
@@ -18,7 +18,7 @@ export default function PlaceViewForm({oldPlace}) {
                 <span>Долгота: </span>
                 <span>{place.longitude}</span>
             </div>
-            <div className='columns-container-item discription'>
+            <div className='columns-container-item place-discription'>
                 <span>Описание: </span>
                 <span>{place.description}</span>
             </div>

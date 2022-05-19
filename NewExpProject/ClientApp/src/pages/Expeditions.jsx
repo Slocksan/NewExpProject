@@ -1,71 +1,83 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
+import axios from 'axios';
 import { Button } from 'reactstrap';
 import DataTable from '../components/DataTable';
+import Cookies from 'js-cookie';
+import ModalWin from '../components/ModalWin';
+import ExpeditionsCreateForm from '../components/expedition/ExpeditionsCreateForm';
 
-function Expeditions() {
-    const columns = useMemo(
-        () => [
-          {
-            Header: "Экспедиции",
-            columns: [
-              {
-                Header: "Название",
-                accessor: "Expedition.name"
-              },
-              {
-                Header: "Место",
-                accessor: "Expedition.place"
-              },
-              {
-                Header: "Дата начала",
-                accessor: "Expedition.startDate"
-              },
-              {
-                Header: "Дата конца",
-                accessor: "Expedition.endDate"
-              },
-              {
-                Header: "Описание",
-                accessor: "Expedition.disciption"
-              },
-            ]
-          }
-        ],
-        []
-      );
+export default function Expeditions() {
+    const [expeditions, setExpeditions] = useState([]);
+    const sitePath = "https://localhost:44322";
 
-    const data = React.useMemo(() => [
-        {
-          "score": 17.592657,
-          "Expedition": {
-            "name": "x-exped",
-            "url": "http://www.tvmaze.com/shows/44813/the-snow-spider",
-            "tame": "The Snow Spider",
-            "place": "Tyumen",
-            "startDate": Date("05.03.2019"),
-            "endDate": Date("05.03.2019"),
-            "disciption": "In Development",
-            "runtime": 30,
-            "premiered": null,
-            "officialSite": null,
-            "schedule": {
-              "time": "",
-              "days": [
-              ]
+    const fetchExpeditions = async () => {
+        const responce = await axios.get(sitePath + "/api/expeditions", {
+            headers: {
+                'Authorization': `Bearer ${Cookies.get('Token')}` 
             }
+          }).catch(err => console.log(err));
+
+        if (responce) {
+            console.log(responce.data);
+            setExpeditions(responce.data);
         }
+    }
+
+    const columns = useMemo(() => ([
+      {
+          Header: "ID",
+          accessor: "id"
+      },
+      {
+          Header: "Локация",
+          accessor: "position.name"
+      },
+      {
+          Header: "Дата начала",
+          accessor: "start_date"
+      },
+      {
+          Header: "Дата конца",
+          accessor: "end_date"
+      },
+      {
+          Header: '',
+          Cell: ({row}) => (
+              <div>
+                  <Button className='datagrid-buttons' onClick={() => {setSelectedEmployee(row.original);
+                      setViewModal(true)}}>Подробнее</Button>
+                  <Button className='datagrid-buttons' onClick={() => {setSelectedEmployee(row.original);
+                      setEditModal(true)}}>Закончить</Button>
+              </div>
+          ),
+          id: "action"
+       }
+  ]));
+
+  const addExpedition = async (expedition) => {
+    const responce = await axios.post(sitePath + "/api/expeditions", expedition, {
+        headers: {
+            'Authorization': `Bearer ${Cookies.get('Token')}` 
         }
-      ], [])
+      }).catch(err => console.log(err));
+
+    setCreateModal(false);
+    fetchExpeditions();
+    };
+
+  const [createModal, setCreateModal] = useState(false);
+
+  useEffect(()=> {
+    fetchExpeditions();
+    }, []);
 
     return(
         <div>
-            <div class="datagrid"><DataTable columns={columns} data={data}/></div>
+            <ModalWin visible={createModal} setVisible={setCreateModal}><ExpeditionsCreateForm createExpedition={addExpedition}/></ModalWin>
+            <div class="datagrid"><DataTable columns={columns} data={expeditions}/></div>
             <div class="buttons-container  d-flex justify-content-end">
-                <Button id="">Подробнее</Button>
-                <Button id="">Создать</Button>
+                <Button onClick={() => setCreateModal(true)}>Создать экспедицию</Button>
             </div>
         </div>
     )
 }
-
-export default Expeditions;

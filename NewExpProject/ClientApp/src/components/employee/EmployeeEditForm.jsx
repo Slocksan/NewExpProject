@@ -6,8 +6,9 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
 export default function EmployeeEditForm({editEmployee, oldEmployee}) {
-    const [employee, setEmployee] = useState({...oldEmployee,firstName: oldEmployee.firstName.trim(), lastName: oldEmployee.lastName.trim(), position: {value:oldEmployee.positionID, label: oldEmployee.position.trim()}})
+    const [employee, setEmployee] = useState({...oldEmployee,firstName: oldEmployee.firstName.trim(), lastName: oldEmployee.lastName.trim()})
     const [positions, setPositions] = useState();
+    const [currentPosition, setCurrentPosition] = useState({value:oldEmployee.positionID, label: oldEmployee.position.trim()});
     const sitePath = "https://localhost:44322";
 
     const fetchPositions = async () => {
@@ -16,9 +17,6 @@ export default function EmployeeEditForm({editEmployee, oldEmployee}) {
         if (responce) {
             const positions = responce.data.map(function(row) { return {value: row.id, label: row.name}});
             setPositions(positions);
-            if(positions.length > 0) {
-                setEmployee({...employee, position: {value: positions[0].id, label: positions[0].name }});
-            } 
         }
     }
 
@@ -28,15 +26,13 @@ export default function EmployeeEditForm({editEmployee, oldEmployee}) {
             ID: employee.id,
             FirstName: employee.firstName,
             LastName: employee.lastName,
-            PositionID: employee.position.value
+            PositionID: currentPosition.value
         }
         editEmployee(editedEmployee)
     }
 
     useEffect(()=> {
         fetchPositions();
-        console.log(oldEmployee);
-        console.log(employee);
     }, []);
 
     return (
@@ -55,8 +51,8 @@ export default function EmployeeEditForm({editEmployee, oldEmployee}) {
             />
             <Dropdown 
                 options={positions} 
-                value={employee.position}
-                onChange={e => setEmployee({...employee, position: e})}
+                value={currentPosition}
+                onChange={e => setCurrentPosition(e)}
             />
             <Button onClick={editCurrentEmployee}>Изменить работника</Button>
         </form>

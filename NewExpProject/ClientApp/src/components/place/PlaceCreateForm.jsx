@@ -16,7 +16,7 @@ export default function PlaceCreateForm({createPlace}) {
     }
 
     return (
-        <form>
+        <form className='place-form'>
             <Input
                 value={place.Name}
                 onChange={e => setPlace({...place, Name: e.target.value})}
@@ -38,7 +38,7 @@ export default function PlaceCreateForm({createPlace}) {
             <Input
                 value={place.Description}
                 onChange={e => setPlace({...place, Description: e.target.value})}
-                type="text"
+                type="textarea"
                 placeholder="Описание"
             />
             <Button onClick={addNewPlace}>Добавить локацию</Button>

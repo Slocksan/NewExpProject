@@ -34,12 +34,18 @@ body {
     right: 25px;
 }
 
+#root >div >.container {
+    margin-bottom: 100px;
+}
+
 footer {
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
     overflow: hidden;
+    color: #ffffff;
+    margin-top: 100px;
 }
 
 footer a {
@@ -48,10 +54,6 @@ footer a {
 }
 
 footer a:hover {
-    color: #ffffff;
-}
-
-footer {
     color: #ffffff;
 }
 
@@ -67,8 +69,9 @@ footer {
 .datagrid {
     margin: 20px auto;
     background-color: #c7ced1;
-    height: 600px;
+    height: 90%;
     width: 90%;
+    padding-bottom: 10px;
 }
 
 div .datagrid-buttons {
@@ -152,4 +155,21 @@ background-image: url(../images/logos.png);
 
 .chart div canvas {
     height: 800px;
+}
+
+.tbody {
+    display: block;
+    height: 300px;
+    overflow: auto;
+}
+.thead, .tbody .tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;/* even columns width , fix width of table too*/
+}
+.thead {
+    width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+}
+.table {
+    width: 400px;
 }

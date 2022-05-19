@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using NewExpProject.Data.EF;
+using Newtonsoft.Json;
 
 namespace NewExpProject.Data
 {
@@ -25,11 +26,9 @@ namespace NewExpProject.Data
         [Column("START_DATE")]
         public DateTime StartDate { get; set; }
 
-        [Required]
         [Column("END_DATE")]
         public DateTime EndDate { get; set; }
 
-        [Required]
         [MaxLength(400)]
         [Column("DESCRIPTION")]
         public string Description { get; set; }
