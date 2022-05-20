@@ -9,7 +9,7 @@ export default function EmployeeEditForm({editEmployee, oldEmployee}) {
     const [employee, setEmployee] = useState({...oldEmployee,firstName: oldEmployee.firstName.trim(), lastName: oldEmployee.lastName.trim()})
     const [positions, setPositions] = useState();
     const [currentPosition, setCurrentPosition] = useState({value:oldEmployee.positionID, label: oldEmployee.position.trim()});
-    const sitePath = process.env.REACT_APP_URL;
+    const sitePath = process.env.REACT_APP_MY_API_URL;
 
     const fetchPositions = async () => {
         const responce = await axios.get(sitePath + "/api/positions").catch(err => console.log(err));

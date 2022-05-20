@@ -5,7 +5,7 @@ import { Input, Button } from 'reactstrap';
 
 const Login = () => {
     const [user, setUser] = useState({Login: '', Password: ''});
-    const sitePath = process.env.REACT_APP_URL;
+    const sitePath = process.env.REACT_APP_MY_API_URL;
 
     const tryLogin = async () => {
         console.log(user);

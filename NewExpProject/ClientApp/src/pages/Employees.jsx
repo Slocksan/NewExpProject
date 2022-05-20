@@ -11,7 +11,7 @@ import EmployeeView from '../components/employee/EmployeeView';
 function Employees() {
     const [employees, setEmployees] = useState([]);
     const [selectedEmployee, setSelectedEmployee] = useState();
-    const sitePath = process.env.REACT_APP_URL;
+    const sitePath = process.env.REACT_APP_MY_API_URL;
 
     const fetchEmployees = async () => {
         const responce = await axios.get(sitePath + "/api/employees", {

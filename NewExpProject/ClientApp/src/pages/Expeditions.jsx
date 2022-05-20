@@ -8,7 +8,7 @@ import ExpeditionsCreateForm from '../components/expedition/ExpeditionsCreateFor
 
 export default function Expeditions() {
     const [expeditions, setExpeditions] = useState([]);
-    const sitePath = process.env.REACT_APP_URL;
+    const sitePath = process.env.REACT_APP_MY_API_URL;
 
     const fetchExpeditions = async () => {
         const responce = await axios.get(sitePath + "/api/expeditions", {

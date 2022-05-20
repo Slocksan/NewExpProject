@@ -26,7 +26,7 @@ import {
   );
 
 const Reports = () => {
-    const sitePath = process.env.REACT_APP_URL;
+    const sitePath = process.env.REACT_APP_MY_API_URL;
     const [positionsCountLabels, setPositionsCountLabels] = useState([]);
     const [positionsCountValues, setPositionsCountValues] = useState([]);
 
