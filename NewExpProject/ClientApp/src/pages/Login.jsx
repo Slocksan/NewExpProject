@@ -5,7 +5,7 @@ import { Input, Button } from 'reactstrap';
 
 const Login = () => {
     const [user, setUser] = useState({Login: '', Password: ''});
-    const sitePath = "https://localhost:44322";
+    const sitePath = process.env.REACT_APP_URL;
 
     const tryLogin = async () => {
         console.log(user);

@@ -11,6 +11,7 @@ import Places from './pages/Places';
 import Login from './pages/Login'
 
 function App() {
+
   return (
     <Layout>
         <BrowserRouter>

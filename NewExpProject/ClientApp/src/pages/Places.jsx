@@ -10,7 +10,7 @@ import PlaceViewForm from '../components/place/PlaceViewForm';
 function Places() {
     const [places, setPlaces] = useState([]);
     const [selectedPlace, setSelectedPlace] = useState();
-    const sitePath = "https://localhost:44322";
+    const sitePath = process.env.REACT_APP_URL;
 
     const fetchPlaces = async () => {
         const responce = await axios.get(sitePath + "/api/places").catch(err => console.log(err));

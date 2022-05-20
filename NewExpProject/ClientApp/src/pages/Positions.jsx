@@ -9,7 +9,7 @@ import PositionEditForm from '../components/position/PositionEditForm';
 function Positions() {
     const [positions, setPositions] = useState([]);
     const [editedPosition, setEditedPosition] = useState();
-    const sitePath = "https://localhost:44322";
+    const sitePath = process.env.REACT_APP_URL;
 
     const fetchPositions = async () => {
         const responce = await axios.get(sitePath + "/api/positions").catch(err => console.log(err));
