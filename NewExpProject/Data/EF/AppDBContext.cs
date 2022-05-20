@@ -23,7 +23,7 @@ namespace NewExpProject.Data
         {
             //"Host=localhost;Database=postgres;Username=postgres;Password=1234"
             //"Host=ec2-52-86-115-245.compute-1.amazonaws.com;Database=d5pb39t2qg3oa7;Username=jippsvmugllwte;Password=b0a462b403a9139b9cebdfaade5d0882ca946aa53a35659be5243120dc883f89"
-            var connString = "Host=ec2-52-86-115-245.compute-1.amazonaws.com;Port=5432;Database=d5pb39t2qg3oa7;Username=jippsvmugllwte;Password=b0a462b403a9139b9cebdfaade5d0882ca946aa53a35659be5243120dc883f89";
+            var connString = "dbname=d5pb39t2qg3oa7 host=ec2-52-86-115-245.compute-1.amazonaws.com port=5432 user=jippsvmugllwte password=b0a462b403a9139b9cebdfaade5d0882ca946aa53a35659be5243120dc883f89 sslmode=require";
             optionsBuilder.UseNpgsql(connString);
         }
     }
