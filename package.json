@@ -17,7 +17,7 @@
     "chart.js": "^3.7.1",
     "js-cookie": "^3.0.1",
     "linq": "^4.0.0",
-    "react": "^18.1.0",
+    "react": "^16.14.0",
     "react-chartjs-2": "^4.1.0",
     "react-cookie": "^4.1.1",
     "react-dropdown": "^1.10.0",
