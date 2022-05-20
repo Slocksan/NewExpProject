@@ -12,7 +12,7 @@ import "../../styles/ExpeditionModal.css";
 export default function ExpeditionsCreateForm({createExpedition}) {
     const [expedition, setExpedition] = useState({startDate: new Date(), place: {value: 0, label: ''}})
     const [places, setPlaces] = useState();
-    const sitePath = "https://localhost:44322";
+    const sitePath = process.env.REACT_APP_URL;
     const [employees, setEmployees] = useState([]);
 
     const fetchPlaces = async () => {

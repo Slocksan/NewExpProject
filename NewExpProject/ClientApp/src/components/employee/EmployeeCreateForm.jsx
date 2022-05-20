@@ -8,7 +8,7 @@ import 'react-dropdown/style.css';
 export default function EmployeeCreateForm({createEmployee}) {
     const [employee, setEmployee] = useState({firstName: '', lastName: '', position: {value:10, label: "Рудокоп"}})
     const [positions, setPositions] = useState();
-    const sitePath = "https://localhost:44322";
+    const sitePath = process.env.REACT_APP_URL;
 
     const fetchPositions = async () => {
         const responce = await axios.get(sitePath + "/api/positions").catch(err => console.log(err));
