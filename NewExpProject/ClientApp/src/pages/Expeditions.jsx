@@ -44,10 +44,8 @@ export default function Expeditions() {
           Header: '',
           Cell: ({row}) => (
               <div>
-                  <Button className='datagrid-buttons' onClick={() => {setSelectedEmployee(row.original);
-                      setViewModal(true)}}>Подробнее</Button>
-                  <Button className='datagrid-buttons' onClick={() => {setSelectedEmployee(row.original);
-                      setEditModal(true)}}>Закончить</Button>
+                  <Button className='datagrid-buttons' onClick={() => {}}>Подробнее</Button>
+                  <Button className='datagrid-buttons' onClick={() => {}}>Закончить</Button>
               </div>
           ),
           id: "action"
