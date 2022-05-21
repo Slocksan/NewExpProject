@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import {Link} from 'react-router-dom';
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import { Button } from 'reactstrap';
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -9,15 +12,45 @@ export class NavMenu extends Component {
     super(props);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.unLogin = this.unLogin.bind(this);
     this.state = {
-      collapsed: true
+      collapsed: true,
+      isLogged: true,
+      sitePath: process.env.REACT_APP_MY_API_URL
     };
+
+    this.getCurrentUser();
   }
 
   toggleNavbar () {
     this.setState({
+      ...this.state,
       collapsed: !this.state.collapsed
     });
+  }
+
+  async getCurrentUser () {
+    const responce = await axios.get(this.state.sitePath + "/get-current-username", {
+      headers: {
+          'Authorization': `Bearer ${Cookies.get('Token')}` 
+      }
+    }).catch(err => {
+      this.setState({...this.state, isLogged:false});
+      Cookies.set('Username', '');
+      Cookies.set('Token', '');
+    });
+
+    if(this.state.isLogged) {
+      Cookies.set('Username',responce.data.username);
+    }
+  }
+
+  async unLogin () {
+    Cookies.set('Username', '');
+    Cookies.set('Token', '');
+
+    this.setState({...this.state, isLogged: false});
+    window.location.reload();
   }
 
   render () {
@@ -41,6 +74,15 @@ export class NavMenu extends Component {
                 <NavItem>
                   <NavLink href="/directories" className="header-nav-link">Доп справочники</NavLink>
                 </NavItem>
+                {
+                  this.state.isLogged && Cookies.get('Username') ? <div>
+                    <span>{Cookies.get('Username')} </span>
+                    <Button onClick={this.unLogin}>Выйти</Button>
+                  </div> :
+                  <NavItem>
+                    <NavLink href="/login" className="header-nav-link">Логин</NavLink>
+                  </NavItem>
+                }
               </ul>
             </Collapse>
           </Container>

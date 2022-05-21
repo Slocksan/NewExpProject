@@ -29,5 +29,8 @@ namespace NewExpProject.Data.EF
         public int PositionID { get; set; }
 
         public Position Position { get; set; }
+
+        [Column("ISREADY")]
+        public bool? IsReady { get; set; }
     }
 }

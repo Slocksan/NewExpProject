@@ -36,7 +36,7 @@ export default function EmployeeEditForm({editEmployee, oldEmployee}) {
     }, []);
 
     return (
-        <form>
+        <form className='employee-form'>
             <Input
                 value={employee.firstName}
                 onChange={e => setEmployee({...employee, firstName: e.target.value})}

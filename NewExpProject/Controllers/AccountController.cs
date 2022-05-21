@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using NewExpProject.Data;
@@ -47,6 +48,20 @@ namespace NewExpProject.Controllers
             };
 
             return Json(response);
+        }
+
+        [Authorize]
+        [HttpGet("/get-current-username")]
+        public IActionResult GetCurrentLoggedUser()
+        {
+            var userName = User.FindFirstValue(ClaimTypes.Name);
+
+            var responce = new
+            {
+                username = userName
+            };
+
+            return Json(responce);
         }
 
         private ClaimsIdentity GetIdentity(string username, string password)

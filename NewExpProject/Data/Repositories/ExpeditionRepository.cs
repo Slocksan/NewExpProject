@@ -37,19 +37,21 @@ namespace NewExpProject.Data.Repositories
             }
         }
 
-        public static bool CreateExpedition(Expedition expeditionToCreate)
+        public static Expedition CreateExpedition(Expedition expeditionToCreate)
         {
             using (var db = new AppDBContext())
             {
                 try
                 {
-                    db.Expeditions.Add(expeditionToCreate);
+                    var addedExp = db.Expeditions.Add(expeditionToCreate);
 
-                    return db.SaveChanges() >= 1;
+                    db.SaveChanges();
+
+                    return addedExp.Entity;
                 }
                 catch (Exception e)
                 {
-                    return false;
+                    return null;
                 }
             }
         }

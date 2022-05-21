@@ -11,10 +11,14 @@
 
 .footer-container {
     background-color: #25393d;
-    height: 60px;
+    height: 100px;
     text-align: end;
     vertical-align: bottom;
     position: relative;
+
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
 }
 
 html {
@@ -29,13 +33,12 @@ body {
 
 .footer-text {
     display: block;
-    position: absolute;
     bottom: 25px;
     right: 25px;
 }
 
 #root >div >.container {
-    margin-bottom: 100px;
+    margin-bottom: 150px;
 }
 
 footer {
@@ -172,4 +175,17 @@ background-image: url(../images/logos.png);
 }
 .table {
     width: 400px;
+}
+
+canvas {
+    width: 700px;
+}
+
+.login-form {
+    margin: 100px auto;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    justify-content: space-between;
 }

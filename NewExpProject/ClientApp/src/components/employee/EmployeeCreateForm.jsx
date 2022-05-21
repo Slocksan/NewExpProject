@@ -17,7 +17,8 @@ export default function EmployeeCreateForm({createEmployee}) {
             const positions = responce.data.map(function(row) { return {value: row.id, label: row.name}});
             setPositions(positions);
             if(positions.length > 0) {
-                setEmployee({...employee, position: {value: positions[0].id, label: positions[0].name }});
+                console.log(positions[0]);
+                setEmployee({...employee, position: positions[0]});
             } 
         }
     }
@@ -38,7 +39,7 @@ export default function EmployeeCreateForm({createEmployee}) {
     }, []);
 
     return (
-        <form>
+        <form className='employee-form'>
             <Input
                 value={employee.firstName}
                 onChange={e => setEmployee({...employee, firstName: e.target.value})}

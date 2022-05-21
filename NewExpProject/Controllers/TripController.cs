@@ -33,6 +33,12 @@ namespace NewExpProject.Controllers
             return TripRepository.GetTripById(id);
         }
 
+        [HttpGet("/get-trips-by-expedition-id/{id}")]
+        public IEnumerable<Trip> GetTripsByExpId(int id)
+        {
+            return TripRepository.GetTripsByExpId(id);
+        }
+
         [HttpDelete("{id}")]
         public bool Delete(int id)
         {

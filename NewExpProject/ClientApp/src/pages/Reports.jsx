@@ -27,8 +27,8 @@ import {
 
 const Reports = () => {
     const sitePath = process.env.REACT_APP_MY_API_URL;
-    const [positionsCountLabels, setPositionsCountLabels] = useState([]);
-    const [positionsCountValues, setPositionsCountValues] = useState([]);
+    const [positionsCountLabels, setPositionsCountLabels] = useState();
+    const [positionsCountValues, setPositionsCountValues] = useState();
 
     const handleOnExportLocations = async () => {
         const responce = await axios.get(sitePath + "/api/places").catch(err => console.log(err));
@@ -57,8 +57,9 @@ const Reports = () => {
             const positionsWithCounts = Enumerable.from(sourceCollection).groupBy(e => e.positionID).select(function(e) { return {"posID": e.key(), "posCount": e.count()}}).toArray();
             console.log(positionsWithCounts);
 
-            setPositionsCountValues([]);
-            setPositionsCountLabels([]);
+
+            const labelsArray = new Array();
+            const valuesArray = new Array();
             for (let index = 0; index < positionsWithCounts.length; index++) {
                 const element = positionsWithCounts[index];
                 
@@ -68,20 +69,19 @@ const Reports = () => {
                     }
                   }).catch(err => console.log(err));
 
-                setPositionsCountLabels([...positionsCountLabels, responce.data.name.trim()]);
-                setPositionsCountValues([...positionsCountValues, element.posCount]);
+                  console.log(responce.data.name.trim());
+                labelsArray.push([responce.data.name.trim()]);
+                valuesArray.push([element.posCount]);
             }
-            console.log(positionsCountLabels);
-            console.log(positionsCountValues);
+            setPositionsCountLabels(labelsArray);
+            setPositionsCountValues(valuesArray);
+
+
             setPositionsCountModal(true);
         }
     };
 
     const [positionsCountModal, setPositionsCountModal] = useState(false);
-
-    useEffect(()=> {
-        fetchPositionsCount();
-    }, []);
 
     const options = {
         responsive: true,
@@ -98,16 +98,17 @@ const Reports = () => {
       
     
     const data = {
-        positionsCountLabels,
+        labels: positionsCountLabels,
         datasets: [          {
             label: '# рабочих на должностях',
             data: positionsCountValues,
             backgrondColor: 'rgba(53, 162, 235, 0.5)',
           },        ],
       };
+
     return(
         <div>
-            <ModalWin className="chart" visible={positionsCountModal} setVisible={setPositionsCountModal}><Bar options={options} data={data}></Bar></ModalWin>
+            {positionsCountLabels && positionsCountValues && <ModalWin className="chart" visible={positionsCountModal} setVisible={setPositionsCountModal}><Bar options={options} data={data}></Bar></ModalWin>}
             <div className="main-container">
                 <div className='reports-container'>
                     <div className="buttons-container d-flex justify-content-around">

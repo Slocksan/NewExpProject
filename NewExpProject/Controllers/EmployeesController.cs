@@ -29,6 +29,13 @@ namespace NewExpProject.Controllers
             return EmployeeRepository.GetEmployees();
         }
 
+        [HttpGet("/api/get-all-free-employees")]
+        [Authorize]
+        public IEnumerable<Employee> GetAllFreeEmployees()
+        {
+            return EmployeeRepository.GetFreeEmployees();
+        }
+
         [HttpGet("{id}")]
         [Authorize]
         public Employee GetById(int id)

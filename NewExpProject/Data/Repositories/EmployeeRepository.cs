@@ -22,11 +22,25 @@ namespace NewExpProject.Data.Repositories
             }
         }
 
+        public static List<Employee> GetFreeEmployees()
+        {
+            using (var db = new AppDBContext())
+            {
+                var employees = db.Employees.Where(e => e.IsReady == true).ToList();
+                foreach (var employee in employees)
+                {
+                    employee.Position = db.Positions.FirstOrDefault(p => p.ID == employee.PositionID);
+                }
+                return employees;
+            }
+        }
+
         public static Employee GetEmployeeById(int employeeId)
         {
             using (var db = new AppDBContext())
             {
                 var employee = db.Employees.FirstOrDefault(p => p.ID == employeeId);
+
                 if (employee != null)
                 {
                     employee.Position = db.Positions.FirstOrDefault(p => p.ID == employee.PositionID);

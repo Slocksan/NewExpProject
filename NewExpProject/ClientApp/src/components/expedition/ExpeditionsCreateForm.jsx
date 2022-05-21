@@ -14,6 +14,7 @@ export default function ExpeditionsCreateForm({createExpedition}) {
     const [places, setPlaces] = useState();
     const sitePath = process.env.REACT_APP_MY_API_URL;
     const [employees, setEmployees] = useState([]);
+    const [selectedEmployees, setSelectedEmployees] = useState([]);
 
     const fetchPlaces = async () => {
         const responce = await axios.get(sitePath + "/api/places", {
@@ -32,7 +33,7 @@ export default function ExpeditionsCreateForm({createExpedition}) {
     }
 
     const fetchEmployees = async () => {
-        const responce = await axios.get(sitePath + "/api/employees", {
+        const responce = await axios.get(sitePath + "/api/get-all-free-employees", {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('Token')}` 
             }
@@ -49,6 +50,7 @@ export default function ExpeditionsCreateForm({createExpedition}) {
         const newExpedition = {
             StartDate: expedition.startDate,
             PlaceID: expedition.place.value,
+            SelectedEmployees: selectedEmployees
         }
         createExpedition(newExpedition);
     }
@@ -79,16 +81,26 @@ export default function ExpeditionsCreateForm({createExpedition}) {
 
     return (
         <form className='expedition-form'>
-            <Dropdown 
-                options={places} 
-                value = {expedition.place}
-                onChange={e => setExpedition({...expedition, place: e})}
-            />
-            <DatePicker
-                selected={expedition.startDate}
-                onChange={(date) => setExpedition({...expedition, startDate: date})}
-            />
-            <div className='table-responsive'><SelectableDataTable columns={columns} data={employees}/></div> 
+            <div className="expedition-rows">
+                <div className="expedition-column">
+                    <span>Локация</span>
+                    <span>Дата начала</span>
+                </div>
+                <div className="expedition-column">
+                    <Dropdown 
+                            options={places} 
+                            value = {expedition.place}
+                            onChange={e => setExpedition({...expedition, place: e})}
+                        />
+                    <DatePicker
+                        className='expedition-datepicker'
+                        selected={expedition.startDate}
+                        onChange={(date) => setExpedition({...expedition, startDate: date})}
+                    />
+                </div>
+            </div>      
+            <span className='empl-des'>Сотрудники:</span>    
+            <div className='table-responsive expedition-table'><SelectableDataTable columns={columns} data={employees} setSelectedValuesIds={setSelectedEmployees}/></div> 
             <Button onClick={addNewExpedition}>Создать экспедицию</Button>
         </form>
     );

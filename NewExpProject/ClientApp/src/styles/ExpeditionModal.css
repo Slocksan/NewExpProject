@@ -1,21 +1,34 @@
 .expedition-form {
-    height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 600px;
     width: 700px;
 }
 
 .expedition-form textarea {
-    height: 250px;
+    height: 350px;
     resize: none;
-}
-
-.expeditions-columns-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 480px;
-    width: 400px;
 }
 
 .expedition-discription {
     height: 250px;
+}
+
+.expedition-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.expedition-rows {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100px;
+    margin-bottom: 25px;
+}
+
+.empl-des {
+    margin-bottom: 10px;
 }

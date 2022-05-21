@@ -36,12 +36,13 @@ function Employees() {
                 }
             }
 
+            console.log(employeesWithPosition);
             setEmployees(employeesWithPosition);
         }
     }
 
     const addEmployee = async (employee) => {
-        const responce = await axios.post(sitePath + "/api/employees", employee, {
+        const responce = await axios.post(sitePath + "/api/employees", {...employee, isReady: true}, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('Token')}` 
             }
@@ -65,6 +66,7 @@ function Employees() {
 
         if (responce) {
             const result = responce.data;
+            console.log(result);
         }
 
         fetchEmployees();
@@ -109,6 +111,17 @@ function Employees() {
         {
             Header: "Position",
             accessor: "position"
+        },
+        {
+            Header: "Готовность",
+            Cell: ({row}) => {
+                if(row.original.isReady) {
+                    return(<span>Свободен</span>);
+                }
+                else {
+                    return(<span>Занят</span>)
+                }
+            }
         },
         {
             Header: '',

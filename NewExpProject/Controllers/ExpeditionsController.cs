@@ -39,7 +39,7 @@ namespace NewExpProject.Controllers
         }
 
         [HttpPost]
-        public bool Create([FromBody] Expedition entity)
+        public Expedition Create([FromBody] Expedition entity)
         {
             return ExpeditionRepository.CreateExpedition(entity);
         }

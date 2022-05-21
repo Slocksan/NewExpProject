@@ -13,7 +13,15 @@ namespace NewExpProject.Data.Repositories
         {
             using (var db = new AppDBContext())
             {
-                return db.Trips.ToList();
+                var trips = db.Trips.ToList();
+
+                foreach (var trip in trips)
+                {
+                    trip.Employee = db.Employees.FirstOrDefault(emp => emp.ID == trip.EmployeeId);
+                    trip.Expedition = db.Expeditions.FirstOrDefault(exp => exp.ID == trip.ExpeditionId);
+                }
+
+                return trips;
             }
         }
 
@@ -21,7 +29,31 @@ namespace NewExpProject.Data.Repositories
         {
             using (var db = new AppDBContext())
             {
-                return db.Trips.FirstOrDefault(p => p.ID == tripId);
+                var trip = db.Trips.FirstOrDefault(p => p.ID == tripId);
+
+                if (trip != null)
+                {
+                    trip.Employee = db.Employees.FirstOrDefault(emp => emp.ID == trip.EmployeeId);
+                    trip.Expedition = db.Expeditions.FirstOrDefault(exp => exp.ID == trip.ExpeditionId);
+                }
+
+                return trip;
+            }
+        }
+
+        public static List<Trip> GetTripsByExpId(int expId)
+        {
+            using (var db = new AppDBContext())
+            {
+                var trips = db.Trips.Where(t => t.ExpeditionId == expId).ToList();
+
+                foreach (var trip in trips)
+                {
+                    trip.Employee = db.Employees.FirstOrDefault(emp => emp.ID == trip.EmployeeId);
+                    trip.Expedition = db.Expeditions.FirstOrDefault(exp => exp.ID == trip.ExpeditionId);
+                }
+
+                return trips;
             }
         }
 

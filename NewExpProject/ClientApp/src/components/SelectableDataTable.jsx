@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components'
 import {
   useTable,
@@ -40,7 +40,7 @@ const IndeterminateCheckbox = React.forwardRef(
   }
 )
 
-export default function SelectableDataTable({ columns, data }) {
+export default function SelectableDataTable({ columns, data, setSelectedValuesIds }) {
   const defaultColumn = React.useMemo(
     () => ({
       // When using the useFlexLayout:
@@ -51,7 +51,7 @@ export default function SelectableDataTable({ columns, data }) {
     []
   )
 
-  const { getTableProps, headerGroups, rows, prepareRow } = useTable(
+  const { getTableProps, headerGroups, rows, prepareRow, selectedFlatRows, state: {selectedRowIds}} = useTable(
     {
       columns,
       data,
@@ -93,6 +93,13 @@ export default function SelectableDataTable({ columns, data }) {
       })
     }
   )
+
+  useEffect(()=> {
+    setSelectedValuesIds(selectedFlatRows.map(v => v.original));
+    }, [
+      setSelectedValuesIds,
+      selectedRowIds
+    ]);
 
   return (
     <div {...getTableProps()} className="table">
